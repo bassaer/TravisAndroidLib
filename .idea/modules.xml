@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/TravisAndroidLib.iml" filepath="$PROJECT_DIR$/.idea/TravisAndroidLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/TravisAndroidLib.iml" filepath="$PROJECT_DIR$/TravisAndroidLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/travismylib/travismylib.iml" filepath="$PROJECT_DIR$/travismylib/travismylib.iml" />
     </modules>
   </component>
 </project>
