@@ -1,0 +1,37 @@
+language: android
+env:
+  global:
+    - secure: "FgCo1AbJVryTo6OGcL4r/qA5JvnqavjhqvSHEWR+HhtIwX7ZmB67zyuakpUKvHxvOQ6qGHBqR02XACfFDTc97/fiMs6+3nsOMv+2iOUHhKPaqDcPQLoy77WJEaIGn6o5Qw5fDKgyUKGkmjVzgAGWauOpypIKoFI6L01lWDWhUvAhFpdp7PJJef1bXbsnI+KGKpdPPV76+XbCpUda2J0p9Nx3qaisiewCs55Ql6iiBaSz9p4Cff/wyOKGHvEXnx+lPAcJRleH56NgcYXDy60iR+8caKvFUyOOiUO9639bNafoF9LEWbuPgQi/rsSLsX/c2/A9Cufw+Zyyprt5yqVRSFTA93MymscyUHKoc9VtAqDBBgyx9IDXEQPYFM12s7pZ3FoC4VrC+EEwg0nbdACSb0iz3BKAY+J6NbUVqxtADmwwFC0FE9dVIGqDBfskcZKGjppk09VBXpEvIY0dbteg72DAgCb+Zw8SEllpzK2gnJ4MW9T0fkTn4Lo2VWhje5uOXDAX1kdSjonYD36WWpt1qmTBiq2zkltoU7MRtE7N7kQdN6kU/JD4evVHmjLCPYG9cafv8MOE3NYaE3Knn3mpMFx0Cr+1OWqCX7n+2si0SG4IAzCpUGqkie4EP11Q8KJF26YPEdVssy6sDIbG5nJAKJXzkcDTJ2iBCyDoN30EATg="
+    - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
+    - ADB_INSTALL_TIMEOUT=10
+branches:
+  only:
+    - master
+android:
+  components:
+    - build-tools-28.0.3
+    - android-28
+    - android-22
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-28
+    - sys-img-armeabi-v7a-android-22
+  licenses:
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+before_install:
+  - yes | sdkmanager "platforms;android-28"
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+before_script:
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - QEMU_AUDIO_DRV=none emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+script:
+  - ./gradlew clean lint test :app:connectedAndroidTest
+after_script:
+  - set -e
+  - ./bump.sh
