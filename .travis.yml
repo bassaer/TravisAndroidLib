@@ -2,6 +2,7 @@ language: android
 env:
   global:
     - secure: "FgCo1AbJVryTo6OGcL4r/qA5JvnqavjhqvSHEWR+HhtIwX7ZmB67zyuakpUKvHxvOQ6qGHBqR02XACfFDTc97/fiMs6+3nsOMv+2iOUHhKPaqDcPQLoy77WJEaIGn6o5Qw5fDKgyUKGkmjVzgAGWauOpypIKoFI6L01lWDWhUvAhFpdp7PJJef1bXbsnI+KGKpdPPV76+XbCpUda2J0p9Nx3qaisiewCs55Ql6iiBaSz9p4Cff/wyOKGHvEXnx+lPAcJRleH56NgcYXDy60iR+8caKvFUyOOiUO9639bNafoF9LEWbuPgQi/rsSLsX/c2/A9Cufw+Zyyprt5yqVRSFTA93MymscyUHKoc9VtAqDBBgyx9IDXEQPYFM12s7pZ3FoC4VrC+EEwg0nbdACSb0iz3BKAY+J6NbUVqxtADmwwFC0FE9dVIGqDBfskcZKGjppk09VBXpEvIY0dbteg72DAgCb+Zw8SEllpzK2gnJ4MW9T0fkTn4Lo2VWhje5uOXDAX1kdSjonYD36WWpt1qmTBiq2zkltoU7MRtE7N7kQdN6kU/JD4evVHmjLCPYG9cafv8MOE3NYaE3Knn3mpMFx0Cr+1OWqCX7n+2si0SG4IAzCpUGqkie4EP11Q8KJF26YPEdVssy6sDIbG5nJAKJXzkcDTJ2iBCyDoN30EATg="
+    - secure: "gYuWRh7XuNK4QFUos0x2ZIRCjTtb1Kt8kzE3UkqSq45sc2kUTtdBGGoGcduju4fOj27uoesOk8wTBCh9SGZN7xn1AxPjIKybC7bcjatIYY59RF6iT87F8/UJc9sftNrTBnLiDhbOd3UfqFvXXD4qancadxEOBn344kHvd+U125Dly1ZA1V4M0cpFV8PQyE2yiU241obTRzrzeAUkCn5vI3K9GkXtzy0aQES8K7+Jh9wODn2KqNOORKzofnbj7PjMsI+hmDgHxgaVET0gSjrgCrE4v60WUU4Fn8oluH5Tufo9INVdnHoLw7Qsa9kXENw85EPuPWv1UgoXcOKJaVRJF63fZNKYJXahmi3hj2HaMjaD8YrUv/FgAv0fU646cisQLBaRIDu+WaQYr+qfyPISIpl8k//Cksm7qaTO9qHGWDDcPVrjZnh4e+luQSkSa3uRWBYA73Yvc8jWEbdndr0hpqwov9iqWbwPYME48UlLhEuBCKB0Kjb+1k2ofzvjhzpKW13rqYapdRNseCDx/SDWvNEALqVwlZsguDP63TWCp8jWpQB5oBYwgBTBv8cTHxrjMwzbXWOpDDRBSJ51p1PoWqIi8DnYJxDggrI+EqaA8LjU5CzNLptIottocSSbySGn0duAeSxZb5c4pezEiJPcY2y+zSTUVG6Rx59HyWvtIm8="
     - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
     - ADB_INSTALL_TIMEOUT=10
 branches:
@@ -32,6 +33,13 @@ before_script:
   - adb shell input keyevent 82 &
 script:
   - ./gradlew clean lint test :app:connectedAndroidTest
-after_script:
+before_deploy:
+  - ./bintray.json.sh > bintray.json
+deploy:
+  provider: bintray
+  file: "bintray.json"
+  user: "bassaer"
+  key: $BINTRAY_API_KEY
+after_deploy:
   - set -e
   - ./bump.sh
