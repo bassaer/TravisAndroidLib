@@ -36,8 +36,9 @@ dependencies {
 def siteUrl = 'https://github.com/bassaer/TravisAndroidLib'
 def gitUrl = 'https://github.com/bassaer/TravisAndroidLib'
 def issueUrl = 'https://github.com/bassaer/TravisAndroidLib'
-Properties properties = new Properties()
-def localProperties = project.rootProject.file('local.properties')
+
+group = 'com.github.bassaer'
+version = rootProject.ext.versionName
 
 bintray {
     user = 'bassaer'
