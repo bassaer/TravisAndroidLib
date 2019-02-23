@@ -35,6 +35,7 @@ script:
   - ./gradlew clean lint test :app:connectedAndroidTest
 before_deploy:
   - ./bintray.json.sh > bintray.json
+  - cat bintray.json
 deploy:
   provider: bintray
   file: "bintray.json"
