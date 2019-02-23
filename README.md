@@ -4,6 +4,6 @@
 
 ```
 dependencies {
-    compile 'com.github.bassaer:travisandroidlib:0.0.1'
+    compile 'com.github.bassaer:travismylib:0.0.1'
 }
 ```
