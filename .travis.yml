@@ -33,14 +33,9 @@ before_script:
   - adb shell input keyevent 82 &
 script:
   - ./gradlew clean lint test :app:connectedAndroidTest
-before_deploy:
-  - ./bintray.json.sh > bintray.json
-  - cat bintray.json
 deploy:
-  provider: bintray
-  file: "bintray.json"
-  user: "bassaer"
-  key: $BINTRAY_API_KEY
+  provider: script
+  script: bash scripts/deploy.sh
 after_deploy:
   - set -e
-  - ./bump.sh
+  - scripts/bump.sh
