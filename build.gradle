@@ -33,7 +33,7 @@ def getLibVersion() {
         commandLine 'scripts/changelog.sh', '-v'
         standardOutput = stdout
     }
-    return stdout.toString()
+    return stdout.toString().trim()
 }
 
 
