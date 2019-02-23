@@ -1,5 +1,8 @@
 # CHANGELOG
 
+version 0.0.7
+- fix scripts/bump.sh
+
 version 0.0.6
 - bump
 
