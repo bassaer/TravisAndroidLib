@@ -36,6 +36,7 @@ script:
 deploy:
   provider: script
   script: bash scripts/deploy.sh
+  skip_cleanup: true
 after_deploy:
   - set -e
   - scripts/bump.sh

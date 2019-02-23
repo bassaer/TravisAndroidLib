@@ -34,8 +34,8 @@ dependencies {
 }
 
 def siteUrl = 'https://github.com/bassaer/TravisAndroidLib'
-def gitUrl = 'https://github.com/bassaer/TravisAndroidLib'
-def issueUrl = 'https://github.com/bassaer/TravisAndroidLib'
+def gitUrl = 'https://github.com/bassaer/TravisAndroidLib.git'
+def issueUrl = 'https://github.com/bassaer/TravisAndroidLib/issues'
 
 group = 'com.github.bassaer'
 version = rootProject.ext.versionName
