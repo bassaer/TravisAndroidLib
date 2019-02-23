@@ -36,12 +36,14 @@ dependencies {
 def siteUrl = 'https://github.com/bassaer/TravisAndroidLib'
 def gitUrl = 'https://github.com/bassaer/TravisAndroidLib'
 def issueUrl = 'https://github.com/bassaer/TravisAndroidLib'
+Properties properties = new Properties()
+def localProperties = project.rootProject.file('local.properties')
 
 bintray {
-    user = System.getenv('bassaer')
+    user = 'bassaer'
     key = System.getenv('BINTRAY_API_KEY')
-
     configurations = ['archives']
+    publish = true
 
     pkg {
         repo = 'TravisAndroidLib'
