@@ -93,11 +93,8 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
+
 task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs.findAll {
-        //exclude kotlin files
-        !(it.name.contains('kotlin'))
-    }
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
 
