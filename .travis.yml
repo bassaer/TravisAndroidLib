@@ -5,6 +5,9 @@ env:
     - secure: "gYuWRh7XuNK4QFUos0x2ZIRCjTtb1Kt8kzE3UkqSq45sc2kUTtdBGGoGcduju4fOj27uoesOk8wTBCh9SGZN7xn1AxPjIKybC7bcjatIYY59RF6iT87F8/UJc9sftNrTBnLiDhbOd3UfqFvXXD4qancadxEOBn344kHvd+U125Dly1ZA1V4M0cpFV8PQyE2yiU241obTRzrzeAUkCn5vI3K9GkXtzy0aQES8K7+Jh9wODn2KqNOORKzofnbj7PjMsI+hmDgHxgaVET0gSjrgCrE4v60WUU4Fn8oluH5Tufo9INVdnHoLw7Qsa9kXENw85EPuPWv1UgoXcOKJaVRJF63fZNKYJXahmi3hj2HaMjaD8YrUv/FgAv0fU646cisQLBaRIDu+WaQYr+qfyPISIpl8k//Cksm7qaTO9qHGWDDcPVrjZnh4e+luQSkSa3uRWBYA73Yvc8jWEbdndr0hpqwov9iqWbwPYME48UlLhEuBCKB0Kjb+1k2ofzvjhzpKW13rqYapdRNseCDx/SDWvNEALqVwlZsguDP63TWCp8jWpQB5oBYwgBTBv8cTHxrjMwzbXWOpDDRBSJ51p1PoWqIi8DnYJxDggrI+EqaA8LjU5CzNLptIottocSSbySGn0duAeSxZb5c4pezEiJPcY2y+zSTUVG6Rx59HyWvtIm8="
     - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
     - ADB_INSTALL_TIMEOUT=10
+    - ANDROID_API_LEVEL=28
+    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+    - ANDROID_ABI=armeabi-v7a
 branches:
   only:
     - master
@@ -20,7 +23,6 @@ android:
     - android-sdk-license-.+
     - google-gdk-license-.+
 before_install:
-  - yes | sdkmanager "platforms;android-28"
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
